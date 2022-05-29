@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string.h>
+#include <ctype.h>
+using namespace std;
+
+int main ()
+{
+    bool hasupper=false;
+    bool haslower=false;
+    bool hasdigit=false;
+    bool hasnumber=false;
+    bool hasymbol=false;
+
+    string password;
+    cout << "Password: ";
+    cin >> password;
+
+    int num=password.size();
+
+    int count=0;
+
+    if(num>=8)
+    {
+        hasnumber=true;
+    }
+
+    for (int i=0; i<password.size(); i++)
+    {
+
+        if (isupper(password[i]))
+        {
+            hasupper=true;
+        }
+        if (isdigit(password[i]))
+        {
+            hasdigit=true;
+        }
+        if (islower(password[i]))
+        {
+            haslower=true;
+        }
+    }
+
+    if (hasupper==true && haslower==true && hasdigit==true && hasnumber==true)
+    {
+        cout << "Password verified" << endl;
+    }
+    else
+    {
+        cout << "Password denied! Because: " << endl;
+        if(hasnumber==false)
+        {
+            cout << "* Password should include at least 8 characters!  " << endl;
+        }
+        if (hasdigit==false)
+        {
+            cout << "* Password should include at least one digit! " << endl;
+        }
+        if(hasupper==false)
+        {
+
+            cout << "* Password should include at least one uppercase! " << endl;
+        }
+        if(haslower==false)
+        {
+            cout << "* Password should include at least one lowercase! " << endl;
+        }
+    }
+
+
+      return main();
+}
