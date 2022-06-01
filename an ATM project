@@ -1,0 +1,483 @@
+// made by Otabek Eshpulatov from 31st May to 1st June.
+#include <iostream>
+#include <windows.h>
+#include <time.h>
+#include <math.h>
+using namespace std;
+
+int password=0,chance=3;
+double balance=0.00;
+
+int pin(int n);
+int balans();
+int Balanstoldir();
+int valyuta();
+int changePin();
+int Mikroqarz();
+int Makroqarz ();
+int kalkulyator();
+int kreditlar();
+int Boshmenyu();
+
+int main()
+{
+    cout << "\tThanks for using our bank services! " << endl;
+    cout << endl;
+    cout << "Firstly, you need to have a four-digits pin. ";
+    cout << "Create one: ";
+    cin >> password;
+    pin(password);
+    Boshmenyu();
+
+    return 0;
+}
+
+int Boshmenyu()
+{
+    int select;
+    system("cls");
+    cout << "\tWelcome to Main Menu." << endl;
+    cout << endl;
+    cout  << "1.Check your balance." << endl;
+    cout  << "2.Fill your balance." << endl;
+    cout  << "3.The ratio of foreign currency to UZB sum." << endl;
+    cout  << "4.Loans."<< endl;
+    cout  << "5.Loan calculator."<< endl;
+    cout  << "6.Change your pin."<< endl;
+    cout  << "7.Exit."<< endl;
+    cout << endl;
+    cout << "enter your option: ";
+    cin >> select;
+
+    if(select==1)
+    {
+        balans();
+    }
+    else if(select==2)
+    {
+        Balanstoldir();
+    }
+    else if(select==3)
+    {
+        valyuta();
+    }
+    else if(select==4)
+    {
+        kreditlar();
+    }
+    else if(select==5)
+    {
+        kalkulyator();
+    }
+    else if(select==6)
+    {
+        changePin();
+    }
+    else if(select==7)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Unknown option! " << endl;
+        Sleep(3000);
+        Boshmenyu();
+    }
+    select=0;
+}
+
+int pin(int n)
+{
+    string s, kod;
+    s=to_string(n);
+
+    if(s.size()!=4)
+    {
+        system("cls");
+        cout << "Re-enter your pin. It should consist of four digits.  ";
+        cin >> n;
+        return pin(n);
+    }
+    else
+    {
+        system("cls");
+        cout << "Your pin accepted. Don't give your pin to anyone! " << endl;
+        Sleep(3000);
+        password=n;
+    }
+}
+
+int balans()
+{
+    int select;
+    system("cls");
+    cout << "Your balance: " << balance <<"$" << endl;
+    cout << endl;
+    cout << "1.Main menu." << endl;
+    cout << "2.Exit. \n\n";
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Boshmenyu();
+    }
+    else if(select==2)
+    {
+        return 0;
+
+    }
+    else
+    {
+        cout << "Unknown option! " << endl;
+        balans();
+    }
+    select=0;
+}
+
+int Balanstoldir()
+{
+    double balance1;
+    int select;
+    system("cls");
+    cout << "How much you want to deposit."<< endl;
+    cout << endl;
+    cout << "Min = 1 $" << endl;
+    cout << "Max = 100.000 $" << endl;
+    cout << endl;
+    cout <<"Sum: ";
+    cin >> balance1;
+
+    if(balance1>0  && balance1<101000)
+    {
+        balance=balance1;
+    }
+    else
+    {
+        system("cls");
+        cout << "Can't be accepted! Re-enter " << endl;
+        Sleep(5000);
+        system("cls");
+        return Balanstoldir();
+    }
+
+    cout << endl;
+    system("cls");
+    cout << "Successfully deposited." << endl;
+    cout << endl;
+    cout << "1.Main menu.\n";
+    cout << "2.Balance.\n";
+    cout << "3.Exit.\n";
+    cout << endl;
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Boshmenyu();
+    }
+    else if(select==2)
+    {
+        balans();
+    }
+    else if(select==3)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Unknown option!" << endl;
+        Sleep(3000);
+        Balanstoldir();
+    }
+
+
+}
+
+int valyuta()
+{
+    int select;
+    system("cls");
+    cout << "The ratio of foreign currency to sum." << endl;
+    cout << endl;
+    cout << "1 USD: 11.045 sum\n";
+    cout << "1 Russian rubl: 177.29 sum\n";
+    cout << "1 Turk lira: 672.86 sum\n";
+    cout << endl;
+    cout << "Last update: 6.1.2022"<< endl;
+    cout << endl;
+    cout << "1.Main menu." << endl;
+    cout << "2.Exit." << endl;
+    cout << endl;
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Boshmenyu();
+    }
+    else if (select==2)
+    {
+        return 0;
+    }
+}
+
+int kalkulyator()
+{
+    int select;
+    double n, sum=0, oy, summa;
+    system("cls");
+    cout << "Enter the interest: ";
+    cin >> n;
+    cout << "Enter the amount: ";
+    cin >> sum;
+    cout << "Enter Bank loan term (month): ";
+    cin >> oy;
+    cout << endl;
+    double foiz=n/100;
+    summa=0;
+    double s=sum/oy;
+    for(int i=1; i<=oy; i++)
+    {
+        summa=s*foiz;
+        cout << i << " - month = " << summa <<"$"<<endl;
+    }
+    cout << endl;
+    cout << endl;
+    cout << "1.Main menu.\n";
+    cout << "2.Exit.\n";
+    cout << endl;
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Boshmenyu();
+    }
+    else if (select==2)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Unknown option! " << endl;
+        Sleep(3000);
+        system("cls");
+        kalkulyator();
+    }
+}
+
+int Mikroqarz()
+{
+    int select;
+
+    system("cls");
+    cout << "Loan type:              educational \n";
+    cout << "Loan term:              36 months \n";
+    cout << "Max amount:             10.000$  \n";
+    cout << "Min amount:             500$  \n";
+    cout << "Interest:               23 \n";
+    cout<< endl;
+    cout<< endl;
+    cout<<"1.Main menu.\n";
+    cout<<"2.Go to the previous panel.\n";
+    cout<<"3.Loan calculator.\n";
+    cout<<"4.Exit.\n";
+    cout << endl;
+    cout << endl;
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Boshmenyu();
+    }
+    else if(select==2)
+    {
+        kreditlar();
+    }
+    else if(select==3)
+    {
+        kalkulyator();
+    }
+    else if(select==4)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Unknown option. " << endl;
+        Sleep(3000);
+        Mikroqarz();
+    }
+}
+
+int Makroqarz ()
+{
+    int select;
+    system("cls");
+    cout << "Loan type:              educational" << endl;
+    cout << "Loan term:              36 months " << endl;
+    cout << "Min amount:             10.000$ " << endl;
+    cout << "Max amount:             100.000$ " << endl;
+    cout << "Loan interest:               29 " << endl;
+    cout << endl;
+    cout << endl;
+    cout << "1.Go to the previous menu. \n";
+    cout << "2.Main menu. \n";
+    cout << "3.Credit calculator. \n";
+    cout << "4.EXIT. \n";
+    cout << endl;
+    cout << endl;
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        kreditlar();
+    }
+    else if(select==2)
+    {
+        Boshmenyu();
+    }
+    else if(select==3)
+    {
+        kalkulyator();
+    }
+    else if (select==4)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Unknown option! "<< endl;
+        Sleep(3000);
+        Makroqarz();
+    }
+
+}
+
+int kreditlar()
+{
+    int select;
+    system("cls");
+    cout << "We currently have only two types of loans: " << endl;
+    cout << endl;
+    cout << "1.Micro.\n";
+    cout << "2.Macro.\n";
+    cout << endl;
+    cout << endl;
+    cout << "3.Main menu.\n";
+    cout << "4.Exit.\n";
+    cout << endl;
+    cout << endl;
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Mikroqarz();
+    }
+    else if(select==2)
+    {
+        Makroqarz();
+    }
+    else if (select==3)
+    {
+        Boshmenyu();
+    }
+    else if(select==4)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout <<"Unknown option!\n";
+        Sleep(3000);
+        kreditlar();
+    }
+}
+
+
+int changePin()
+{
+    int select, kod,pin;
+
+    system("cls");
+    cout << "To change your pin, enter your current one: ";
+    cin >> pin;
+    if(pin==password)
+    {
+        system("cls");
+        cout << "Pin is verified. Enter a new pin: ";
+        cin >> kod;
+        cout << "Enter again: ";
+        cin >> pin;
+        if(kod==pin)
+        {
+            if(kod>999 && kod<10000)
+            {
+                password=kod;
+                system("cls");
+                cout << "Your pin changed successfully." << endl;
+                chance=3;
+                cout << endl;
+                cout << endl;
+                cout << "1.Main menu.\n";
+                cout << "2.Exit.\n";
+                cout << endl;
+                cout << "Enter your option: ";
+                cin >> select;
+                if(select==1)
+                {
+                    Boshmenyu();
+                }
+                else if(select==2)
+                {
+                    return 0;
+                }
+                else
+                {
+                    system("cls");
+                    cout << "Unknown option! " << endl;
+                    Sleep(3000);
+                    changePin();
+                }
+
+            }
+            else
+            {
+                system("cls");
+                cout << "Pin should consist of four digits." << endl;
+                Sleep(3000);
+                changePin();
+            }
+
+        }
+        else
+        {
+            system("cls");
+            cout<< "Pins don't match. Try again." << endl;
+            chance=3;
+            Sleep(3000);
+            changePin();
+        }
+
+    }
+    else
+    {
+        if(chance==1)
+        {
+            system("cls");
+            cout << "Your account blocked! In order to unblock, go to local banks ." << endl;
+            password=1001;
+            return 0;
+        }
+        chance--;
+        system("cls");
+        cout << "Pin is wrong! Your chances : " << chance << endl;
+        Sleep(3000);
+        changePin();
+    }
+}
+
+
