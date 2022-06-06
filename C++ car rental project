@@ -1,0 +1,267 @@
+// Created by Eshpulatov Otabek
+#include <iostream>
+#include <string.h>
+#include <ctype.h>
+#include <windows.h>
+using namespace std;
+
+
+int  CarNumbers=0;
+string model[1000];
+string color[1000];
+string RentPrice[1000];
+string year[1000];
+string phoneNumber[1000];
+string speed[1000];
+
+int Add();
+int Remove ();
+int AdminPanel();
+int main();
+int UserPanel();
+
+int main ()
+{
+    system("cls");
+    int select;
+    cout << "\t\tWelcome to our car rental agency.\n\n";
+    cout << "1.Admin panel\n";
+    cout << "2.User panel\n";
+    cout << "3.Exit\n\n\n";
+    cout<< "Enter your option: ";
+    cin>>select;
+
+    if(select==1)
+    {
+        AdminPanel();
+    }
+    else if(select==2)
+    {
+        UserPanel();
+    }
+    else if (select==3)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Something went wrong. Try again!";
+        return main();
+    }
+
+    return  0;
+}
+
+
+int UserPanel()
+{
+    int select;
+    system("cls");
+    cout << "\t\t\tWelcome to user panel. You can view cars that are on rental.\n";
+    cout << "Number of cars on sale: " << CarNumbers << endl;
+    cout<<endl;
+    cout<<endl;
+
+    for(int i=0; i<CarNumbers; i++)
+    {
+        cout <<i+1<<"."<<endl;
+        cout<<"_______________________________________________"<<endl;
+        cout<<"Car model: "<<model[i]<<endl;
+        cout<<"Color: " << color[i]<<endl;
+        cout<<"Manufactured year: " << year[i]<<endl;
+        cout << "Max speed of the car: " <<speed[i]<<endl;
+        cout << "A daily rental price of the car: " <<RentPrice[i]<<"$"<<endl;
+        cout<<endl;
+        cout<<"Phone number: " << phoneNumber[i]<<endl;
+        cout << endl;
+        cout << endl;
+
+    }
+    if(CarNumbers==0)
+    {
+        cout<<"There is no car added to the list.";
+    }
+    cout << endl;
+    cout << endl;
+    cout << "1.Main menu.\n";
+    cout << "2.Exit.\n";
+    cout<<endl;
+    cout<<"Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        return main();
+    }
+    else if(select==2)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Ooops, something went wrong. Try again.";
+        Sleep(3000);
+        return UserPanel();
+    }
+    system("cls");
+
+}
+int Add()
+{
+    int n, select;
+    system("cls");
+    cout << "How many products you want to add: ";
+    cin>>n;
+    CarNumbers+=n;
+    cout<<endl;
+    cout<<endl;
+    system("cls");
+    for(int i=0; i<n; i++)
+    {
+        cout << "Enter "<<i+1<<" - car module: ";
+        cin>>model[i];
+        cout <<"Enter a manufactured year of the car: ";
+        cin>>year[i];
+        cout << "Enter a color of the car: ";
+        cin>>color[i];
+        cout << "Enter a daily rental price of the car in $: ";
+        cin>>RentPrice[i];
+        cout << "Enter max speed of the car in km/h: ";
+        cin>>speed[i];
+        cout<<"Contact number: ";
+        cin>>phoneNumber[i];
+        cout << endl;
+
+    }
+    system("cls");
+    cout << "You have successfully added new items to the list.\n\n";
+    cout << "1.Main menu: \n";
+    cout << "2.Go to previous page.\n";
+    cout << "3.Exit.\n\n\n";
+    cout << "Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        return main();
+    }
+    else if(select==2)
+    {
+        return AdminPanel();
+    }
+    else if(select==3)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Ooops, something went wrong. Try again!";
+        Sleep(3000);
+        return Add();
+    }
+}
+int Remove ()
+{
+    system("cls");
+    int position, select;
+    cout << "Enter the order of an item you want to remove: ";
+    cin >> position;
+    if(position<CarNumbers)
+    {
+        CarNumbers--;
+        position--;
+        for(int i=position; i<CarNumbers; i++)
+        {
+            string temp=model[i];
+            model[i]=model[i+1];
+            model[i+1]=temp;
+            string temp1=color[i];
+            color[i]=color[i+1];
+            color[i+1]=temp1;
+            string temp3=RentPrice[i];
+            RentPrice[i]=RentPrice[i+1];
+            RentPrice[i+1]=temp3;
+            string temp4=speed[i];
+            speed[i]=speed[i+1];
+            speed[i+1]=temp4;
+        }
+    }
+    else
+    {
+        system("cls");
+        cout << "Something went wrong! Try again.";
+        Sleep(3000);
+        return Remove();
+    }
+    system("cls");
+    cout << "You have successfully remove the item from the list.\n\n";
+    cout << "1.Go to previous page.\n";
+    cout << "2.Main menu.\n";
+    cout << "3.Exit.\n\n\n";
+    cout<<"Enter your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        return AdminPanel();
+    }
+    else if(select==2)
+    {
+        return main();
+    }
+    else if(select==3)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Ooops, something went wrong. Try again!";
+        Sleep(3000);
+        return Remove();
+    }
+
+}
+int AdminPanel()
+{
+    int select;
+    system("cls");
+    cout<<"\t\tWelcome to Admin Panel. You can fill your catalog here.\n\n";
+    cout << "1.Add new products.\n";
+    cout << "2.Remove products from the list.\n";
+    cout << "3.Main menu.\n";
+    cout << "4.Exit.\n\n\n";
+    cout << "Select your option: ";
+    cin >> select;
+    if(select==1)
+    {
+        Add();
+    }
+    else if(select==2)
+    {
+
+        if(CarNumbers==0)
+        {
+            system("cls");
+            cout << "There is no car added to the list.\n\n " << endl;
+            Sleep(3000);
+            return AdminPanel();
+        }
+        Remove();
+    }
+    else if(select==3)
+    {
+        main();
+    }
+    else if(select==4)
+    {
+        return 0;
+    }
+    else
+    {
+        system("cls");
+        cout << "Something went wrong. Try again.";
+        Sleep(3000);
+        return AdminPanel();
+    }
+}
